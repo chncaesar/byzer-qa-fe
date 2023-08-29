@@ -1,28 +1,29 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App.tsx'
+import * as ReactDOM from "react-dom/client";
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+
+import Login from './login';
+import QA from './QA';
+
 import './index.css'
-import { HashRouter as Router, Route, redirect, Switch } from 'react-router-dom';
 
-
-// ReactDOM.createRoot(document.getElementById('root')!).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// )
-
-ReactDOM.render(
-  <Router>
-      <Switch>
-          <Route path="/admin" component={App}/>          
-          {
-              mainRoute.map( (route, key)=>{
-                  return <Route path={route.pathname} component={route.component} key={key}/>
-              })
-          }
-
-          <Redirect to='/home' from='/' exact/>
-      </Switch>
-  </Router>,
-  document.getElementById('root')
-);
+const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,           
+    },
+    {
+      path: "qa",
+      element: <QA />,
+    },
+    
+  ]);
+  
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  );

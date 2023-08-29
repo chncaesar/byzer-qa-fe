@@ -2,18 +2,20 @@ import { useState } from 'react'
 import './App.css'
 import axios from "axios";
 import { encode } from 'js-base64'
+import { useNavigate } from "react-router-dom";
 
-import { Input, Button,message, InputRef } from 'antd';
 
-function App() {  
-  
+import { Input, Button,} from 'antd';
+
+function Login() {  
+  const navigate = useNavigate();
+
   const [user, setUser] = useState("")
   const [pwd, setPwd] = useState("")
 
-
   const userInputChange = (e) => {
     setUser(e.target.value)
-  }  
+  }
 
   const pwdInputChange = (e) => {
     setPwd(e.target.value)
@@ -25,7 +27,7 @@ function App() {
         Authorization: 'Basic ' + encode(user + ':' + pwd)        
       }
     })
-    window.location.href=''
+    navigate("/QA");    
   }; 
 
   const aboutMe = () => {
@@ -41,10 +43,9 @@ function App() {
       </div>
       <Button type="primary" onClick={login}>登录</Button>
 
-      <Button type="primary" onClick={aboutMe}>WhoAmI</Button>
 
     </>
   )
 }
 
-export default App
+export default Login
